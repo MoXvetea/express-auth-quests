@@ -6,12 +6,12 @@ const { verifyToken } = require("../middlewares/tokenHandler")
 const router = express.Router()
 
 
+router.get("/", getAllMovies);
+router.get("/:id", getMovieById);
 // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX WALL WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
 router.use(verifyToken)
 
-router.get("/", getAllMovies);
-router.get("/:id", getMovieById);
 router.post("/post", postMovie);
 router.put("/update", upDateMovie);
 router.delete("/delete", deleteMovie);

@@ -16,4 +16,5 @@ router.get("/:id", getUserById)
 router.use(verifyToken);
 
 router.put("/update", HashPassword, upDateUser)
+
 module.exports = router;
