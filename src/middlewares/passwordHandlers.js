@@ -1,5 +1,6 @@
 const argon2 = require('argon2')
 
+
 const hashingOptions = {
   type: argon2.argon2id,
   memoryCost: 2 ** 16,
@@ -17,18 +18,21 @@ const HashPassword = async (req, res, next) => {
 }
 
 const DeHashPassword = async (req, res, next) => {
-  const decoding = await argon2.verify(req.utilisateur.mdp, req.body.password)
+
   try {
-    delete req.body.password
-    delete req.utilisateur.mdp
-    decoding ? next() : res.sendStatus(403)
+    const decoding = await argon2.verify(req.userDb.hashedPassword, req.body.password)
+    delete req.body
+    delete req.userDb.hashedPassword
+    decoding ? next() : res.sendStatus(403)   
   } catch (error) {
-    console.error(error)
     res.sendStatus(500)
   }
 }
 
+
+
 module.exports = {
   HashPassword,
   DeHashPassword,
+
 }

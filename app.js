@@ -3,9 +3,6 @@ const express = require("express");
 const router = require("./src/router")
 
 const app = express();
-// const welcome = (req, res) => {
-//   res.send("Welcome to my favourite movie list");
-// };
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

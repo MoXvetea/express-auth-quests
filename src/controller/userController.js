@@ -1,5 +1,4 @@
-const { findAllUsers, findUserById, signUp, upDate } = require("../models/usersManager");
-
+const { findAllUsers, findUserById, signUp, verifyPassword, upDateProfile } = require("../models/usersManager");
 
 const getAllUsers = async (req, res) => {
     try {
@@ -9,6 +8,7 @@ const getAllUsers = async (req, res) => {
         console.error(error);
     }
 }
+
 const getUserById = async (req, res) => {
     const id = (req.params.id)
     try {
@@ -29,13 +29,26 @@ const postUser = async (req, res) => {
     }
 }
 
-const upDateUser = async (req, res) => {
-    const modifiedProfile = req.body
+const getUserWithPasswordAndPassToNext = async (req, res, next) => {
+    const identification = req.body
     try {
-        upDate(modifiedProfile)
-        res.sendStatus(200)
-    } catch(error) {
+        const userDb = await verifyPassword(identification);
+        req.userDb = userDb[0]
+        next();
+    } catch (error) {
         console.error(error);
     }
 }
-module.exports = { getAllUsers, getUserById, postUser, upDateUser };
+
+
+
+const upDateUser = async (req, res) => {
+    const modifiedProfile = req.body
+    try {
+        upDateProfile(modifiedProfile)
+        res.sendStatus(200)
+    } catch (error) {
+        console.error(error);
+    }
+}
+module.exports = { getAllUsers, getUserById, postUser, upDateUser, getUserWithPasswordAndPassToNext };

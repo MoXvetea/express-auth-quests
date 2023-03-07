@@ -8,6 +8,7 @@ const findAllUsers = async () => {
         console.error(error);
     }
 };
+
 const findUserById = async (id) => {
     try {
         const [user] = await db.query("SELECT firstname, lastname, email, city, language FROM users WHERE id=?", [id])
@@ -16,6 +17,18 @@ const findUserById = async (id) => {
         console.error(error);
     }
 };
+
+const verifyPassword = async (identification) => {
+    try {
+        const [userDb] = await db.query(
+            `SELECT id, firstname, lastname, email, city, language, hashedPassword FROM users WHERE email=? `,
+            [identification.email]
+        )
+        return userDb
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 const signUp = async (newProfile) => {
     try {
@@ -35,7 +48,7 @@ const signUp = async (newProfile) => {
     }
 }
 
-const upDate = async (modifiedProfile) => {
+const upDateProfile = async (modifiedProfile) => {
     console.log(modifiedProfile);
     try {
         db.query(`UPDATE users SET hashedPassword = ? WHERE email = ?`,
@@ -43,7 +56,6 @@ const upDate = async (modifiedProfile) => {
     } catch (error) {
         console.error(error);
     }
-
 }
 
-module.exports = { findAllUsers, findUserById, signUp, upDate };
+module.exports = { findAllUsers, findUserById, signUp, upDateProfile, verifyPassword };
