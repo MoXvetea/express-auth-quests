@@ -1,7 +1,7 @@
 const express = require("express");
 
-const { getAllMovies, getMovieById, postMovie, upDateMovie, deleteMovie } = require("../controller/movieController");
-const { verifyToken } = require("../middlewares/tokenHandler")
+const { getAllMovies, getMovieById, postMovie, upDateMovie, deleteMovie } = require("../controller/movieControllers");
+const { verifyToken } = require("../authMiddlewares/tokenHandlers")
 
 const router = express.Router()
 

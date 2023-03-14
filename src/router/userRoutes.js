@@ -1,9 +1,8 @@
 const express = require("express");
-const app = require("../../app");
 
-const { getAllUsers, getUserById, postUser, upDateUser, getUserWithPasswordAndPassToNext, } = require("../controller/userController");
-const { HashPassword, DeHashPassword, } = require("../middlewares/passwordHandlers");
-const { sendToken, verifyToken } = require ("../middlewares/tokenHandler.js")
+const { getAllUsers, getUserById, postUser, upDateUser, getUserWithPasswordAndPassToNext, } = require("../controller/userControllers");
+const { HashPassword, DeHashPassword, } = require("../authMiddlewares/passwordHandlers");
+const { sendToken, verifyToken } = require ("../authMiddlewares/tokenHandlers.js")
 
 const router = express.Router()
 

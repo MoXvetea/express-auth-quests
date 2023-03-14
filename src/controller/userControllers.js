@@ -1,4 +1,4 @@
-const { findAllUsers, findUserById, signUp, verifyPassword, upDateProfile } = require("../models/usersManager");
+const { findAllUsers, findUserById, signUp, verifyPassword, upDateProfile } = require("../models/usersManagers");
 
 const getAllUsers = async (req, res) => {
     try {

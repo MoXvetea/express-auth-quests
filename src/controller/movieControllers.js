@@ -1,4 +1,4 @@
-const { findAllMovies, findMovieById, addMovie, upDateDatas, eraseMovie } = require("../models/moviesManager");
+const { findAllMovies, findMovieById, addMovie, upDateDatas, eraseMovie } = require("../models/moviesManagers");
 
 
 const getAllMovies = async (req, res) => {
